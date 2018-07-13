@@ -56,35 +56,11 @@ public class QuickSort extends Algorithm {
                 i++;
             
             swapValue(i, j);
-            Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            draw();
-                            // write() is for testing
-                            write();
-                        }
-                    });
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException ex) {
-
-            }
+            draw();
             }
         }
         swapValue(i+1, high);
-        Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            draw();
-                            // write() is for testing
-                            write();
-                        }
-                    });
-        try {
-                Thread.sleep(200);
-            } catch (InterruptedException ex) {
-
-            }
+        draw();
         return i+1;
     }
     

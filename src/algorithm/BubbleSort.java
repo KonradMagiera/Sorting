@@ -39,19 +39,7 @@ public class BubbleSort extends Algorithm {
             for (int j = 0; j < getSize() - 1; j++) {
                 if (getItem(j) > getItem(j + 1)) {
                     swapValue(j, j + 1);
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            // write() is for testing
-                            write();
-                            draw();
-                        }
-                    });
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException ex) {
-
-                    }
+                    draw();
                 }
 
             }

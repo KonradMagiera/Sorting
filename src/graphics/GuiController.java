@@ -2,6 +2,7 @@ package graphics;
 
 import algorithm.Algorithm;
 import algorithm.BubbleSort;
+import algorithm.MergeSort;
 import algorithm.QuickSort;
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,7 +44,7 @@ public class GuiController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sortingAlgorithm.getItems().addAll("Bubble sort", "Quick sort");
+        sortingAlgorithm.getItems().addAll("Bubble sort", "Quick sort", "Merge sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -125,6 +126,10 @@ public class GuiController implements Initializable {
             } else if (sortingAlgorithm.getValue() == "Quick sort") {
                 lockButtons();
                 algorithm = new QuickSort(this, list);
+                algorithm.restart();
+            } else if(sortingAlgorithm.getValue() == "Merge sort"){
+                lockButtons();
+                algorithm = new MergeSort(this, list);
                 algorithm.restart();
             }
         }
