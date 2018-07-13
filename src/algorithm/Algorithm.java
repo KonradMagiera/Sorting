@@ -25,10 +25,6 @@ public abstract class Algorithm extends Service<Void> {
         return list.get(i);
     }
     
-    public void setValue(int i, int j){
-        list.set(i, list.get(j));
-    }
-    
     public void swapValue(int i, int j){
         Collections.swap(list, i, j);
     }
@@ -39,6 +35,16 @@ public abstract class Algorithm extends Service<Void> {
     public void write(){
         System.out.println(list);
     }
+    
+    public void unlock(){
+        gui.unlockButtons();
+    }
+    
+    public List<Double> getList(){
+        return list;
+    }
     @Override
     protected abstract Task<Void> createTask();
+    
+    protected abstract void sort();
 }

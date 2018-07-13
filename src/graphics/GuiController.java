@@ -2,6 +2,7 @@ package graphics;
 
 import algorithm.Algorithm;
 import algorithm.BubbleSort;
+import algorithm.QuickSort;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -39,9 +40,10 @@ public class GuiController implements Initializable {
     private Stage stage;
     private FileChooser fileChooser;
     private Algorithm algorithm;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sortingAlgorithm.getItems().addAll("Bubble Sort", "qsort");
+        sortingAlgorithm.getItems().addAll("Bubble sort", "Quick sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -69,6 +71,18 @@ public class GuiController implements Initializable {
 
     public List<Double> getList() {
         return list;
+    }
+
+    public void unlockButtons() {
+        loadB.setDisable(false);
+        sortingAlgorithm.setDisable(false);
+        startB.setDisable(false);
+    }
+
+    public void lockButtons() {
+        startB.setDisable(true);
+        sortingAlgorithm.setDisable(true);
+        loadB.setDisable(true);
     }
 
     @FXML
@@ -103,13 +117,14 @@ public class GuiController implements Initializable {
 
     @FXML
     private void sortArray(ActionEvent event) {
-        if (sortingAlgorithm.getValue() != null) {
-            startB.setDisable(true);
-            sortingAlgorithm.setDisable(true);
-            loadB.setDisable(true);
-
-            if (true) {
+        if (!list.isEmpty()) {
+            if (sortingAlgorithm.getValue() == "Bubble sort") {
+                lockButtons();
                 algorithm = new BubbleSort(this, list);
+                algorithm.restart();
+            } else if (sortingAlgorithm.getValue() == "Quick sort") {
+                lockButtons();
+                algorithm = new QuickSort(this, list);
                 algorithm.restart();
             }
         }
