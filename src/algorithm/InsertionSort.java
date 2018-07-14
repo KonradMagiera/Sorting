@@ -5,9 +5,10 @@ import java.util.List;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 
-public class BubbleSort extends Algorithm {
 
-    public BubbleSort(GuiController gui, List<Double> list) {
+public class InsertionSort extends Algorithm{
+
+    public InsertionSort(GuiController gui, List<Double> list) {
         super(gui, list);
     }
 
@@ -35,15 +36,17 @@ public class BubbleSort extends Algorithm {
 
     @Override
     protected void sort() {
-        for (int i = 0; i < getSize(); i++) {
-            for (int j = 0; j < getSize() - 1; j++) {
-                if (getItem(j) > getItem(j + 1)) {
-                    // swap j and (j+1) elements
-                    swapValue(j, j + 1);
-                    draw();
-                }
-
+        for(int i = 1; i < getSize(); ++i){
+            double key = getItem(i);
+            int j = i -1;
+            while (j >= 0 && getItem(j) > key){
+                setItem(j+1, getItem(j));
+                draw();
+                j = j - 1;
             }
+            setItem(j+1, key);
+            draw();
         }
     }
+    
 }

@@ -8,8 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class SortingMain extends Application {
-    
-    
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/graphics/layout.fxml"));
@@ -26,5 +25,5 @@ public class SortingMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

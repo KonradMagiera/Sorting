@@ -2,6 +2,7 @@ package graphics;
 
 import algorithm.Algorithm;
 import algorithm.BubbleSort;
+import algorithm.InsertionSort;
 import algorithm.MergeSort;
 import algorithm.QuickSort;
 import java.io.BufferedReader;
@@ -44,12 +45,12 @@ public class GuiController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sortingAlgorithm.getItems().addAll("Bubble sort", "Quick sort", "Merge sort");
+        sortingAlgorithm.getItems().addAll("Bubble sort", "Quick sort", "Merge sort", "Insertion sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
 
-    public void CalculateSizeMultipliers(List array) {
+    private void CalculateSizeMultipliers(List array) {
         if (!array.isEmpty()) {
             wid = (int) (display.getWidth() / array.size());
             hei = (int) (display.getHeight() / (double) Collections.max(array));
@@ -58,6 +59,7 @@ public class GuiController implements Initializable {
 
     public void drawArray() {
         display.getChildren().clear();
+        CalculateSizeMultipliers(list);
         for (int i = 0; i < list.size(); i++) {
             Rectangle r = new Rectangle(wid * i, (display.getHeight()) - hei * list.get(i), wid, hei * list.get(i));
             r.setFill(Color.RED);
@@ -88,6 +90,7 @@ public class GuiController implements Initializable {
 
     @FXML
     private void loadArray(ActionEvent event) {
+        // create fileChooser to open txt file
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("TXT files", "*.txt"));
@@ -95,6 +98,7 @@ public class GuiController implements Initializable {
         fileChooser.setTitle("Load array");
         fileChooser.setInitialFileName("SortThisArray");
         File openedFile = fileChooser.showOpenDialog(stage);
+        // if chosen file is not null read array
         if (openedFile != null) {
             try {
                 FileReader fr = new FileReader(openedFile);
@@ -103,10 +107,20 @@ public class GuiController implements Initializable {
                 if (line != null) {
                     list.clear();
                     String[] doubles = line.split("\\s");
+                    // try to load values to array
                     for (String s : doubles) {
-                        list.add(Double.parseDouble(s));
+                        try {
+                            // only positive numbers are supported by gui at the moment
+                            if (Double.parseDouble(s) >= 0) {
+                                list.add(Double.parseDouble(s));
+                            } else {
+                                System.out.println("Negative number skipped: " + s);
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("wrong value: " + s);
+                        }
                     }
-                    CalculateSizeMultipliers(list);
+                    // calculate multipier to fit rectangles to gui
                     drawArray();
                     startB.setDisable(false);
                 }
@@ -127,9 +141,13 @@ public class GuiController implements Initializable {
                 lockButtons();
                 algorithm = new QuickSort(this, list);
                 algorithm.restart();
-            } else if(sortingAlgorithm.getValue() == "Merge sort"){
+            } else if (sortingAlgorithm.getValue() == "Merge sort") {
                 lockButtons();
                 algorithm = new MergeSort(this, list);
+                algorithm.restart();
+            } else if(sortingAlgorithm.getValue() == "Insertion sort"){
+                lockButtons();
+                algorithm = new InsertionSort(this, list);
                 algorithm.restart();
             }
         }

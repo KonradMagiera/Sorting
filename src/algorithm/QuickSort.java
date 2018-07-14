@@ -39,29 +39,35 @@ public class QuickSort extends Algorithm {
     protected void sort() {
         sort(getList(), 0, getSize() - 1);
     }
-    
-    private void sort(List<Double> list, int low, int high){
-        if(low < high){
+
+    private void sort(List<Double> list, int low, int high) {
+        if (low < high) {
+            // partitioning index
             int pi = partition(list, low, high);
+
+            // recursively sort elements
             sort(list, low, pi - 1);
-            sort(list, pi+1, high);
+            sort(list, pi + 1, high);
         }
     }
-    
-    private int partition(List<Double> list, int low, int high){
+
+    private int partition(List<Double> list, int low, int high) {
         double pivot = list.get(high);
-        int i = low -1;
-        for(int j = low; j <high; j++){
-            if(list.get(j) <= pivot){
+
+        // index of smaller element
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (list.get(j) <= pivot) {
                 i++;
-            
-            swapValue(i, j);
-            draw();
+                // swap i and j elements
+                swapValue(i, j);
+                draw();
             }
         }
-        swapValue(i+1, high);
+        // swap (i+1) and high elements
+        swapValue(i + 1, high);
         draw();
-        return i+1;
+        return i + 1;
     }
-    
+
 }

@@ -27,12 +27,15 @@ public abstract class Algorithm extends Service<Void> {
             }
         });
         try {
-            Thread.sleep(200);
+            Thread.sleep(175);
         } catch (InterruptedException ex) {
 
         }
     }
 
+    public void setItem(int i, double d){
+        list.set(i, d);
+    }
     public double getItem(int i) {
         return list.get(i);
     }
