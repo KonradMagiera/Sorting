@@ -33,9 +33,10 @@ public abstract class Algorithm extends Service<Void> {
         }
     }
 
-    public void setItem(int i, double d){
+    public void setItem(int i, double d) {
         list.set(i, d);
     }
+
     public double getItem(int i) {
         return list.get(i);
     }
@@ -61,7 +62,7 @@ public abstract class Algorithm extends Service<Void> {
     }
 
     @Override
-    protected  Task<Void> createTask(){
+    protected Task<Void> createTask() {
         return new Task<Void>() {
             @Override
             protected Void call() {

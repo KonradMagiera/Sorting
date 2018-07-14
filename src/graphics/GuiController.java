@@ -2,10 +2,12 @@ package graphics;
 
 import algorithm.Algorithm;
 import algorithm.BubbleSort;
+import algorithm.CycleSort;
 import algorithm.InsertionSort;
 import algorithm.MergeSort;
 import algorithm.QuickSort;
 import algorithm.SelectionSort;
+import algorithm.ShellSort;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -46,7 +48,8 @@ public class GuiController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sortingAlgorithm.getItems().addAll("Bubble sort", "Quick sort", "Merge sort", "Insertion sort", "Selection sort");
+        sortingAlgorithm.getItems().addAll("Bubble sort", "Quick sort", "Merge sort",
+                "Insertion sort", "Selection sort", "Shell sort", "Cycle sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -153,6 +156,14 @@ public class GuiController implements Initializable {
             } else if ("Selection sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new SelectionSort(this, list);
+                algorithm.restart();
+            } else if ("Shell sort".equals(sortingAlgorithm.getValue())) {
+                lockButtons();
+                algorithm = new ShellSort(this, list);
+                algorithm.restart();
+            } else if ("Cycle sort".equals(sortingAlgorithm.getValue())) {
+                lockButtons();
+                algorithm = new CycleSort(this, list);
                 algorithm.restart();
             }
         }
