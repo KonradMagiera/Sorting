@@ -7,6 +7,7 @@ import algorithm.InsertionSort;
 import algorithm.MergeSort;
 import algorithm.QuickSort;
 import algorithm.RecursiveBubbleSort;
+import algorithm.RecursiveInsertionSort;
 import algorithm.SelectionSort;
 import algorithm.ShellSort;
 import java.io.BufferedReader;
@@ -50,7 +51,7 @@ public class GuiController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sortingAlgorithm.getItems().addAll("Bubble sort", "Recursive bubble sort", "Quick sort",
-                "Merge sort", "Insertion sort", "Selection sort", "Shell sort", "Cycle sort");
+                "Merge sort", "Insertion sort", "Recursive insertion sort", "Selection sort", "Shell sort", "Cycle sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -169,6 +170,10 @@ public class GuiController implements Initializable {
             } else if ("Recursive bubble sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new RecursiveBubbleSort(this, list);
+                algorithm.restart();
+            } else if ("Recursive insertion sort".equals(sortingAlgorithm.getValue())) {
+                lockButtons();
+                algorithm = new RecursiveInsertionSort(this, list);
                 algorithm.restart();
             }
         }
