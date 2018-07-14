@@ -9,15 +9,18 @@ Sorting algorithms with visualisation
 
 ## Version
 
-0.6
+0.7
 
 ## Algorithms
 
 There are available several algorithms:
 * Bubble sort
+* Comb sort
 * Cycle sort
 * Insertion sort
 * Merge sort
+* Recursive bubble sort
+* Recursive insertion sort
 * Selection sort
 * Shell sort
 * Quick sort
