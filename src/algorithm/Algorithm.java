@@ -61,7 +61,26 @@ public abstract class Algorithm extends Service<Void> {
     }
 
     @Override
-    protected abstract Task<Void> createTask();
+    protected  Task<Void> createTask(){
+        return new Task<Void>() {
+            @Override
+            protected Void call() {
+                try {
+                    sort();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            unlock();
+                        }
+                    });
+                } catch (Exception e) {
+
+                }
+
+                return null;
+            }
+        };
+    }
 
     protected abstract void sort();
 }

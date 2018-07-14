@@ -2,37 +2,11 @@ package algorithm;
 
 import graphics.GuiController;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 
 public class QuickSort extends Algorithm {
 
     public QuickSort(GuiController gui, List<Double> list) {
         super(gui, list);
-    }
-
-    @Override
-    protected Task<Void> createTask() {
-        return new Task<Void>() {
-            @Override
-            protected Void call() {
-                try {
-                    sort();
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            unlock();
-                        }
-                    });
-                } catch (Exception e) {
-
-                }
-
-                return null;
-            }
-        };
     }
 
     @Override
@@ -69,5 +43,4 @@ public class QuickSort extends Algorithm {
         draw();
         return i + 1;
     }
-
 }

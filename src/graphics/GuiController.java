@@ -5,6 +5,7 @@ import algorithm.BubbleSort;
 import algorithm.InsertionSort;
 import algorithm.MergeSort;
 import algorithm.QuickSort;
+import algorithm.SelectionSort;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -45,7 +46,7 @@ public class GuiController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sortingAlgorithm.getItems().addAll("Bubble sort", "Quick sort", "Merge sort", "Insertion sort");
+        sortingAlgorithm.getItems().addAll("Bubble sort", "Quick sort", "Merge sort", "Insertion sort", "Selection sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -133,24 +134,27 @@ public class GuiController implements Initializable {
     @FXML
     private void sortArray(ActionEvent event) {
         if (!list.isEmpty()) {
-            if (sortingAlgorithm.getValue() == "Bubble sort") {
+            if ("Bubble sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new BubbleSort(this, list);
                 algorithm.restart();
-            } else if (sortingAlgorithm.getValue() == "Quick sort") {
+            } else if ("Quick sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new QuickSort(this, list);
                 algorithm.restart();
-            } else if (sortingAlgorithm.getValue() == "Merge sort") {
+            } else if ("Merge sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new MergeSort(this, list);
                 algorithm.restart();
-            } else if(sortingAlgorithm.getValue() == "Insertion sort"){
+            } else if ("Insertion sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new InsertionSort(this, list);
+                algorithm.restart();
+            } else if ("Selection sort".equals(sortingAlgorithm.getValue())) {
+                lockButtons();
+                algorithm = new SelectionSort(this, list);
                 algorithm.restart();
             }
         }
     }
-
 }
