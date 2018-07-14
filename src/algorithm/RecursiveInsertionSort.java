@@ -18,6 +18,8 @@ public class RecursiveInsertionSort extends Algorithm {
         if (n <= 1) {
             return;
         }
+
+        // sort first (n-1) elements
         sort(n - 1);
 
         double last = getItem(n - 1);

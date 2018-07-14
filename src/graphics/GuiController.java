@@ -2,6 +2,7 @@ package graphics;
 
 import algorithm.Algorithm;
 import algorithm.BubbleSort;
+import algorithm.CombSort;
 import algorithm.CycleSort;
 import algorithm.InsertionSort;
 import algorithm.MergeSort;
@@ -51,7 +52,8 @@ public class GuiController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sortingAlgorithm.getItems().addAll("Bubble sort", "Recursive bubble sort", "Quick sort",
-                "Merge sort", "Insertion sort", "Recursive insertion sort", "Selection sort", "Shell sort", "Cycle sort");
+                "Merge sort", "Insertion sort", "Recursive insertion sort", "Selection sort", "Shell sort", "Cycle sort",
+                "Comb sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -174,6 +176,10 @@ public class GuiController implements Initializable {
             } else if ("Recursive insertion sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new RecursiveInsertionSort(this, list);
+                algorithm.restart();
+            } else if ("Comb sort".equals(sortingAlgorithm.getValue())) {
+                lockButtons();
+                algorithm = new CombSort(this, list);
                 algorithm.restart();
             }
         }
