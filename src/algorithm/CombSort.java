@@ -27,7 +27,7 @@ public class CombSort extends Algorithm {
                 if (getItem(i) > getItem(i + gap)) {
                     swapValue(i, i + gap);
                     draw();
-                    
+
                     // set swapped
                     swapped = true;
                 }
