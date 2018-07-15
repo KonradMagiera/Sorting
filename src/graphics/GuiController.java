@@ -15,6 +15,7 @@ import algorithm.RecursiveBubbleSort;
 import algorithm.RecursiveInsertionSort;
 import algorithm.SelectionSort;
 import algorithm.ShellSort;
+import algorithm.StoogeSort;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -57,7 +58,7 @@ public class GuiController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         sortingAlgorithm.getItems().addAll("Bubble sort", "Recursive bubble sort", "Quick sort",
                 "Merge sort", "Insertion sort", "Recursive insertion sort", "Selection sort", "Shell sort", "Cycle sort",
-                "Comb sort", "Bitonic sort", "Coctail sort", "Pancake sort", "Recursive merge sort");
+                "Comb sort", "Bitonic sort", "Coctail sort", "Pancake sort", "Recursive merge sort", "Stooge sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -200,6 +201,10 @@ public class GuiController implements Initializable {
             } else if ("Recursive merge sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new RecursiveMergeSort(this, list);
+                algorithm.restart();
+            } else if ("Stooge sort".equals(sortingAlgorithm.getValue())) {
+                lockButtons();
+                algorithm = new StoogeSort(this, list);
                 algorithm.restart();
             }
         }
