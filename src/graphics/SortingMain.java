@@ -2,6 +2,7 @@ package graphics;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -19,6 +20,11 @@ public class SortingMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
         primaryStage.setTitle("Sorting");
+        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue)
+                -> gui.drawArray();
+
+        primaryStage.widthProperty().addListener(stageSizeListener);
+        primaryStage.heightProperty().addListener(stageSizeListener);
         primaryStage.show();
     }
 
