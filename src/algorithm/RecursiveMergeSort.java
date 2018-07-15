@@ -4,9 +4,9 @@ import graphics.GuiController;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IterativeMergeSort extends Algorithm {
+public class RecursiveMergeSort extends Algorithm {
 
-    public IterativeMergeSort(GuiController gui, List<Double> list) {
+    public RecursiveMergeSort(GuiController gui, List<Double> list) {
         super(gui, list);
     }
 

@@ -7,7 +7,7 @@ import algorithm.CoctailSort;
 import algorithm.CombSort;
 import algorithm.CycleSort;
 import algorithm.InsertionSort;
-import algorithm.IterativeMergeSort;
+import algorithm.RecursiveMergeSort;
 import algorithm.MergeSort;
 import algorithm.PancakeSort;
 import algorithm.QuickSort;
@@ -57,7 +57,7 @@ public class GuiController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         sortingAlgorithm.getItems().addAll("Bubble sort", "Recursive bubble sort", "Quick sort",
                 "Merge sort", "Insertion sort", "Recursive insertion sort", "Selection sort", "Shell sort", "Cycle sort",
-                "Comb sort", "Bitonic sort", "Coctail sort", "Pancake sort", "Iterative merge sort");
+                "Comb sort", "Bitonic sort", "Coctail sort", "Pancake sort", "Recursive merge sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -197,9 +197,9 @@ public class GuiController implements Initializable {
                 lockButtons();
                 algorithm = new PancakeSort(this, list);
                 algorithm.restart();
-            } else if ("Iterative merge sort".equals(sortingAlgorithm.getValue())) {
+            } else if ("Recursive merge sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
-                algorithm = new IterativeMergeSort(this, list);
+                algorithm = new RecursiveMergeSort(this, list);
                 algorithm.restart();
             }
         }
