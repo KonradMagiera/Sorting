@@ -58,10 +58,10 @@ public class GuiController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sortingAlgorithm.getItems().addAll("Bubble sort", "Recursive bubble sort", "Quick sort",
-                "Merge sort", "Insertion sort", "Recursive insertion sort", "Selection sort", "Shell sort", "Cycle sort",
-                "Comb sort", "Bitonic sort", "Coctail sort", "Pancake sort", "Recursive merge sort", "Stooge sort", "Odd-Even sort",
-                "Iterative quick sort");
+        sortingAlgorithm.getItems().addAll("Bitonic sort", "Bubble sort", "Coctail sort", "Comb sort", "Cycle sort",
+                "Insertion sort", "Iterative quick sort", "Merge sort", "Odd-Even sort", "Pancake sort",
+                "Quick sort", "Recursive bubble sort", "Recursive insertion sort", "Recursive merge sort",
+                "Selection sort", "Shell sort", "Stooge sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
