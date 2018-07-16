@@ -9,6 +9,7 @@ import algorithm.CycleSort;
 import algorithm.InsertionSort;
 import algorithm.RecursiveMergeSort;
 import algorithm.MergeSort;
+import algorithm.OddEvenSort;
 import algorithm.PancakeSort;
 import algorithm.QuickSort;
 import algorithm.RecursiveBubbleSort;
@@ -58,7 +59,7 @@ public class GuiController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         sortingAlgorithm.getItems().addAll("Bubble sort", "Recursive bubble sort", "Quick sort",
                 "Merge sort", "Insertion sort", "Recursive insertion sort", "Selection sort", "Shell sort", "Cycle sort",
-                "Comb sort", "Bitonic sort", "Coctail sort", "Pancake sort", "Recursive merge sort", "Stooge sort");
+                "Comb sort", "Bitonic sort", "Coctail sort", "Pancake sort", "Recursive merge sort", "Stooge sort", "Odd-Even sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -205,6 +206,10 @@ public class GuiController implements Initializable {
             } else if ("Stooge sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new StoogeSort(this, list);
+                algorithm.restart();
+            } else if ("Odd-Even sort".equals(sortingAlgorithm.getValue())) {
+                lockButtons();
+                algorithm = new OddEvenSort(this, list);
                 algorithm.restart();
             }
         }
