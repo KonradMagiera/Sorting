@@ -1,6 +1,7 @@
 package algorithm;
 
 import graphics.GuiController;
+import java.util.Collections;
 import java.util.List;
 
 public class QuickSort extends Algorithm {
@@ -34,12 +35,12 @@ public class QuickSort extends Algorithm {
             if (list.get(j) <= pivot) {
                 i++;
                 // swap i and j elements
-                swapValue(i, j);
+                Collections.swap(list, i, j);
                 draw();
             }
         }
         // swap (i+1) and high elements
-        swapValue(i + 1, high);
+        Collections.swap(list, i + 1, high);
         draw();
         return i + 1;
     }
