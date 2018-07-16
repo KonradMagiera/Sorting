@@ -64,16 +64,15 @@ public class GuiController implements Initializable {
         list = new ArrayList<>();
     }
 
-    private void CalculateSizeMultipliers(List array) {
-        if (!array.isEmpty()) {
-            wid = (int) (display.getWidth() / array.size());
-            hei = (int) (display.getHeight() / (double) Collections.max(array));
+    public void CalculateSizeMultipliers() {
+        if (!list.isEmpty()) {
+            wid = (int) (display.getWidth() / list.size());
+            hei = (int) (display.getHeight() / (double) Collections.max(list));
         }
     }
 
     public void drawArray() {
         display.getChildren().clear();
-        CalculateSizeMultipliers(list);
         for (int i = 0; i < list.size(); i++) {
             Rectangle r = new Rectangle(wid * i, (display.getHeight()) - hei * list.get(i), wid, hei * list.get(i));
             r.setFill(Color.RED);
@@ -135,6 +134,7 @@ public class GuiController implements Initializable {
                         }
                     }
                     // calculate multipier to fit rectangles to gui
+                    CalculateSizeMultipliers();
                     drawArray();
                     startB.setDisable(false);
                 }

@@ -21,7 +21,10 @@ public class SortingMain extends Application {
         primaryStage.setResizable(true);
         primaryStage.setTitle("Sorting");
         ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue)
-                -> gui.drawArray();
+                -> {
+            gui.CalculateSizeMultipliers();
+            gui.drawArray();
+        };
 
         primaryStage.widthProperty().addListener(stageSizeListener);
         primaryStage.heightProperty().addListener(stageSizeListener);
