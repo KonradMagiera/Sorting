@@ -55,6 +55,7 @@ public class GuiController implements Initializable {
     private Stage stage;
     private FileChooser fileChooser;
     private Algorithm algorithm;
+    private double min;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -68,15 +69,21 @@ public class GuiController implements Initializable {
 
     public void CalculateSizeMultipliers() {
         if (!list.isEmpty()) {
+            min = Collections.min(list);
+            if (min >= 0) {
+                min = 0;
+            } else {
+                min = Math.abs(min);
+            }
             wid = (int) (display.getWidth() / list.size());
-            hei = (int) (display.getHeight() / (double) Collections.max(list));
+            hei = (int) (display.getHeight() / ((double) Collections.max(list) + 1.1 * min));
         }
     }
 
     public void drawArray() {
         display.getChildren().clear();
         for (int i = 0; i < list.size(); i++) {
-            Rectangle r = new Rectangle(wid * i, (display.getHeight()) - hei * list.get(i), wid, hei * list.get(i));
+            Rectangle r = new Rectangle(wid * i, (display.getHeight()) - hei * (list.get(i) + 1.1 * min), wid, hei * (list.get(i) + 1.1 * min));
             r.setFill(Color.RED);
             r.setStroke(Color.YELLOW);
             display.getChildren().add(r);
@@ -125,12 +132,8 @@ public class GuiController implements Initializable {
                     // try to load values to array
                     for (String s : doubles) {
                         try {
-                            // only positive numbers are supported by gui at the moment
-                            if (Double.parseDouble(s) >= 0) {
-                                list.add(Double.parseDouble(s));
-                            } else {
-                                System.out.println("Negative number skipped: " + s);
-                            }
+                            // now supports both positive and negative numbers
+                            list.add(Double.parseDouble(s));
                         } catch (NumberFormatException e) {
                             System.out.println("wrong value: " + s);
                         }
