@@ -14,16 +14,23 @@ Sorting algorithms with visualisation
 ## Algorithms
 
 There are available several algorithms:
+* Bitonic sort
 * Bubble sort
+* Coctail sort
 * Comb sort
 * Cycle sort
 * Insertion sort
+* Iterative quick sort
 * Merge sort
+* Odd-Even sort
+* Pancake sort
+* Quick sort
 * Recursive bubble sort
 * Recursive insertion sort
+* Recursive merge sort
 * Selection sort
 * Shell sort
-* Quick sort
+* Stooge sort
 
 ## License
 
