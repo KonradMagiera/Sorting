@@ -9,7 +9,7 @@ Sorting algorithms with visualisation
 
 ## Version
 
-0.7
+1.0
 
 ## Algorithms
 
