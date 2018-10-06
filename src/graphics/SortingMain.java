@@ -22,7 +22,7 @@ public class SortingMain extends Application {
         primaryStage.setTitle("Sorting");
         ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue)
                 -> {
-            gui.CalculateSizeMultipliers();
+            gui.calculateSizeMultipliers();
             gui.drawArray();
         };
 

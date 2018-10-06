@@ -49,7 +49,10 @@ public class GuiController implements Initializable {
     private ChoiceBox<String> sortingAlgorithm;
     @FXML
     private Button startB;
-
+    @FXML
+    private Button restoreB;
+    
+    
     private List<Double> list;
     private int wid = 10;
     private int hei = 10;
@@ -57,6 +60,7 @@ public class GuiController implements Initializable {
     private FileChooser fileChooser;
     private Algorithm algorithm;
     private double min;
+    private File openedFile;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -68,7 +72,7 @@ public class GuiController implements Initializable {
         list = new ArrayList<>();
     }
 
-    public void CalculateSizeMultipliers() {
+    public void calculateSizeMultipliers() {
         if (!list.isEmpty()) {
             min = Collections.min(list);
             if (min >= 0) {
@@ -103,25 +107,17 @@ public class GuiController implements Initializable {
         loadB.setDisable(false);
         sortingAlgorithm.setDisable(false);
         startB.setDisable(false);
+        restoreB.setDisable(false);
     }
 
     public void lockButtons() {
         startB.setDisable(true);
         sortingAlgorithm.setDisable(true);
         loadB.setDisable(true);
+        restoreB.setDisable(true);
     }
-
-    @FXML
-    private void loadArray(ActionEvent event) {
-        // create fileChooser to open txt file
-        fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("TXT files", "*.txt"));
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-        fileChooser.setTitle("Load array");
-        fileChooser.setInitialFileName("SortThisArray");
-        File openedFile = fileChooser.showOpenDialog(stage);
-        // if chosen file is not null read array
+    
+    private void loadFromFile(){
         if (openedFile != null) {
             try {
                 FileReader fr = new FileReader(openedFile);
@@ -140,7 +136,7 @@ public class GuiController implements Initializable {
                         }
                     }
                     // calculate multipier to fit rectangles to gui
-                    CalculateSizeMultipliers();
+                    calculateSizeMultipliers();
                     drawArray();
                     startB.setDisable(false);
                 }
@@ -150,6 +146,26 @@ public class GuiController implements Initializable {
         }
     }
 
+    @FXML
+    private void loadArray(ActionEvent event) {
+        // create fileChooser to open txt file
+        fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("TXT files", "*.txt"));
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.setTitle("Load array");
+        fileChooser.setInitialFileName("SortThisArray");
+        openedFile = fileChooser.showOpenDialog(stage);
+        // if chosen file is not null read array
+        loadFromFile();
+    }
+
+    @FXML
+    private void restoreArray(ActionEvent event) {
+        list.removeAll(list);
+        loadFromFile();
+    }
+    
     @FXML
     private void sortArray(ActionEvent event) {
         if (!list.isEmpty()) {
@@ -228,4 +244,6 @@ public class GuiController implements Initializable {
             }
         }
     }
+
+
 }

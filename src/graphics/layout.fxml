@@ -28,6 +28,7 @@
                   <Font name="Candara" size="14.0" />
                </font>
             </Button>
+            <Button fx:id="restoreB" mnemonicParsing="false" onAction="#restoreArray" text="Restore array" />
             <Label text="Choose sorting algorithm:">
                <font>
                   <Font size="14.0" />
