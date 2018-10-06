@@ -19,6 +19,7 @@ There are available several algorithms:
 * Coctail sort
 * Comb sort
 * Cycle sort
+* Heap sort
 * Insertion sort
 * Iterative quick sort
 * Merge sort
