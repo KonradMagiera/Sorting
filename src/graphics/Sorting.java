@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class SortingMain extends Application {
+public class Sorting extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
