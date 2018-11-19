@@ -16,6 +16,7 @@ import algorithm.PancakeSort;
 import algorithm.QuickSort;
 import algorithm.RecursiveBubbleSort;
 import algorithm.RecursiveInsertionSort;
+import algorithm.RecursiveQuickSort;
 import algorithm.SelectionSort;
 import algorithm.ShellSort;
 import algorithm.StoogeSort;
@@ -66,8 +67,9 @@ public class GuiController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         sortingAlgorithm.getItems().addAll("Bitonic sort", "Bubble sort", "Coctail sort", "Comb sort", "Cycle sort", "Heap sort",
                 "Insertion sort", "Iterative quick sort", "Merge sort", "Odd-Even sort", "Pancake sort",
-                "Quick sort", "Recursive bubble sort", "Recursive insertion sort", "Recursive merge sort",
+                "Quick sort", "Recursive bubble sort", "Recursive insertion sort", "Recursive merge sort", "Recursive Quick sort",
                 "Selection sort", "Shell sort", "Stooge sort");
+//        sortingAlgorithm.getItems().addAll("Quick sort end", "Recursive Quick sort end");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -125,11 +127,10 @@ public class GuiController implements Initializable {
                 String line = br.readLine();
                 if (line != null) {
                     list.clear();
-                    String[] doubles = line.split("\\s");
+                    String[] doubles = line.split("\\s+");
                     // try to load values to array
                     for (String s : doubles) {
                         try {
-                            // now supports both positive and negative numbers
                             list.add(Double.parseDouble(s));
                         } catch (NumberFormatException e) {
                             System.out.println("wrong value: " + s);
@@ -141,7 +142,7 @@ public class GuiController implements Initializable {
                     startB.setDisable(false);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                
             }
         }
     }
@@ -173,11 +174,7 @@ public class GuiController implements Initializable {
                 lockButtons();
                 algorithm = new BubbleSort(this, list);
                 algorithm.restart();
-            } else if ("Quick sort".equals(sortingAlgorithm.getValue())) {
-                lockButtons();
-                algorithm = new QuickSort(this, list);
-                algorithm.restart();
-            } else if ("Merge sort".equals(sortingAlgorithm.getValue())) {
+            }  else if ("Merge sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new MergeSort(this, list);
                 algorithm.restart();
@@ -241,9 +238,15 @@ public class GuiController implements Initializable {
                 lockButtons();
                 algorithm = new HeapSort(this, list);
                 algorithm.restart();
+            } else if ("Recursive Quick sort".equals(sortingAlgorithm.getValue())) {
+                lockButtons();
+                algorithm = new RecursiveQuickSort(this, list);
+                algorithm.restart();
+            } else if ("Quick sort".equals(sortingAlgorithm.getValue())) {
+                lockButtons();
+                algorithm = new QuickSort(this, list);
+                algorithm.restart();
             }
         }
     }
-
-
 }
