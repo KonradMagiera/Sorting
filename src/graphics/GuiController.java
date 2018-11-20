@@ -34,9 +34,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -52,8 +54,7 @@ public class GuiController implements Initializable {
     private Button startB;
     @FXML
     private Button restoreB;
-    
-    
+
     private List<Double> list;
     private int wid = 10;
     private int hei = 10;
@@ -61,6 +62,7 @@ public class GuiController implements Initializable {
     private FileChooser fileChooser;
     private Algorithm algorithm;
     private double min;
+    private final double multiplier = 1.1;
     private File openedFile;
 
     @Override
@@ -83,17 +85,24 @@ public class GuiController implements Initializable {
                 min = Math.abs(min);
             }
             wid = (int) (display.getWidth() / list.size());
-            hei = (int) (display.getHeight() / ((double) Collections.max(list) + 1.1 * min));
+            hei = (int) (display.getHeight() / ((double) Collections.max(list) + multiplier * min));
         }
     }
 
     public void drawArray() {
         display.getChildren().clear();
         for (int i = 0; i < list.size(); i++) {
-            Rectangle r = new Rectangle(wid * i, (display.getHeight()) - hei * (list.get(i) + 1.1 * min), wid, hei * (list.get(i) + 1.1 * min));
+            double posHeight = (display.getHeight()) - hei * (list.get(i) + multiplier * min);
+            double height = hei * (list.get(i) + multiplier * min);
+            Rectangle r = new Rectangle(wid * i, posHeight, wid, height);
             r.setFill(Color.RED);
             r.setStroke(Color.YELLOW);
             display.getChildren().add(r);
+            Label label = new Label(list.get(i).toString());
+            label.setFont(new Font(16));
+            label.setLayoutX(wid * i + wid / 3);
+            label.setLayoutY((display.getHeight()) - (hei * (list.get(i) + multiplier * min)) / 2);
+            display.getChildren().add(label);
         }
     }
 
@@ -118,8 +127,8 @@ public class GuiController implements Initializable {
         loadB.setDisable(true);
         restoreB.setDisable(true);
     }
-    
-    private void loadFromFile(){
+
+    private void loadFromFile() {
         if (openedFile != null) {
             try {
                 FileReader fr = new FileReader(openedFile);
@@ -142,7 +151,7 @@ public class GuiController implements Initializable {
                     startB.setDisable(false);
                 }
             } catch (IOException e) {
-                
+
             }
         }
     }
@@ -166,7 +175,7 @@ public class GuiController implements Initializable {
         list.removeAll(list);
         loadFromFile();
     }
-    
+
     @FXML
     private void sortArray(ActionEvent event) {
         if (!list.isEmpty()) {
@@ -174,7 +183,7 @@ public class GuiController implements Initializable {
                 lockButtons();
                 algorithm = new BubbleSort(this, list);
                 algorithm.restart();
-            }  else if ("Merge sort".equals(sortingAlgorithm.getValue())) {
+            } else if ("Merge sort".equals(sortingAlgorithm.getValue())) {
                 lockButtons();
                 algorithm = new MergeSort(this, list);
                 algorithm.restart();
