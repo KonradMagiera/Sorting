@@ -1,25 +1,6 @@
 package graphics;
 
-import algorithm.Algorithm;
-import algorithm.BitonicSort;
-import algorithm.BubbleSort;
-import algorithm.CoctailSort;
-import algorithm.CombSort;
-import algorithm.CycleSort;
-import algorithm.HeapSort;
-import algorithm.InsertionSort;
-import algorithm.IterativeQuickSort;
-import algorithm.RecursiveMergeSort;
-import algorithm.MergeSort;
-import algorithm.OddEvenSort;
-import algorithm.PancakeSort;
-import algorithm.QuickSort;
-import algorithm.RecursiveBubbleSort;
-import algorithm.RecursiveInsertionSort;
-import algorithm.RecursiveQuickSort;
-import algorithm.SelectionSort;
-import algorithm.ShellSort;
-import algorithm.StoogeSort;
+import algorithm.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -32,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -56,13 +38,13 @@ public class GuiController implements Initializable {
     private Button restoreB;
 
     private List<Double> list;
-    private int wid = 10;
-    private int hei = 10;
+    private double wid = 10;
+    private double hei = 10;
     private Stage stage;
     private FileChooser fileChooser;
     private Algorithm algorithm;
     private double min;
-    private final double multiplier = 1.1;
+    private final double multiplier = 1.5;
     private File openedFile;
 
     @Override
@@ -71,7 +53,8 @@ public class GuiController implements Initializable {
                 "Insertion sort", "Iterative quick sort", "Merge sort", "Odd-Even sort", "Pancake sort",
                 "Quick sort", "Recursive bubble sort", "Recursive insertion sort", "Recursive merge sort", "Recursive Quick sort",
                 "Selection sort", "Shell sort", "Stooge sort");
-//        sortingAlgorithm.getItems().addAll("Quick sort end", "Recursive Quick sort end");
+//        sortingAlgorithm.getItems().add("Quick sort");
+        sortingAlgorithm.setValue("Quick sort");
         startB.setDisable(true);
         list = new ArrayList<>();
     }
@@ -84,8 +67,8 @@ public class GuiController implements Initializable {
             } else {
                 min = Math.abs(min);
             }
-            wid = (int) (display.getWidth() / list.size());
-            hei = (int) (display.getHeight() / ((double) Collections.max(list) + multiplier * min));
+            wid =  display.getWidth() / list.size();
+            hei =  display.getHeight() / ((double) Collections.max(list) + multiplier * min);
         }
     }
 
@@ -100,8 +83,10 @@ public class GuiController implements Initializable {
             display.getChildren().add(r);
             Label label = new Label(list.get(i).toString());
             label.setFont(new Font(16));
-            label.setLayoutX(wid * i + wid / 3);
+            label.setLayoutX(wid * i);
             label.setLayoutY((display.getHeight()) - (hei * (list.get(i) + multiplier * min)) / 2);
+            label.setPrefWidth(wid);
+            label.setAlignment(Pos.CENTER);
             display.getChildren().add(label);
         }
     }
@@ -155,7 +140,7 @@ public class GuiController implements Initializable {
             }
         }
     }
-
+    
     @FXML
     private void loadArray(ActionEvent event) {
         // create fileChooser to open txt file

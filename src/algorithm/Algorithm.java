@@ -18,13 +18,10 @@ public abstract class Algorithm extends Service<Void> {
     }
 
     public void draw() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                gui.drawArray();
-                // write() is for testing
-                write();
-            }
+        Platform.runLater(() -> {
+            gui.drawArray();
+            // write() is for testing
+            // write();   
         });
         try {
             Thread.sleep(175);
@@ -68,11 +65,8 @@ public abstract class Algorithm extends Service<Void> {
             protected Void call() {
                 try {
                     sort();
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            unlock();
-                        }
+                    Platform.runLater(() -> {
+                        unlock();
                     });
                 } catch (Exception e) {
 
